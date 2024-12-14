@@ -76,7 +76,7 @@ To reassemble the weights:
 Run the following command to ensure the `AceTrack_T5_weights.pt` file is correctly reassembled:
 ```bash
 ls -lh AceTrack_T5_weights.pt
-
+   ```
 
 2. **Start the Backend**:
     ```bash
