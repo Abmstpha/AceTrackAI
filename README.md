@@ -1,4 +1,4 @@
-# AceTrack - A Student Feedback Generator
+# AceTrackAI - A Student Feedback Generator
 
 AceTrack is an AI-powered tool designed to evaluate student responses to historical questions and provide detailed, constructive feedback. It leverages the power of transformer models, specifically T5, to process and assess answers based on predefined correct responses.
 
@@ -71,11 +71,12 @@ AceTrack/
 ├── app.py                 # Backend script
 ├── frontend.py            # Frontend script
 ├── requirements.txt       # List of dependencies
-├── AceTrack_T5_weights.pt # Fine-tuned model weights
+├── AceTrack_T5_weights.part-aa  # Model weights (chunked)
+├── AceTrack_T5_weights.part-ab  # Model weights (chunked)
+├── AceTrack_T5_weights.part-ac  # Model weights (chunked)
 ├── AceTrack_T5_tokenizer/ # Tokenizer files
 │   ├── special_tokens_map.json
 │   ├── tokenizer_config.json
-│   ├── vocab.model
-│   └── vocab.txt
-├── uploads/               # Uploaded PDF files
+│   ├── spiece.model
+│   └── added_tokens.json
 └── README.md              # This README file
