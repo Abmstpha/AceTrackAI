@@ -1,6 +1,6 @@
 # AceTrackAI - A Student Feedback Generator
 
-AceTrack is an AI-powered tool designed and developped by Abdellahi El Moustapha to evaluate student responses to historical questions and provide detailed, constructive feedback. It leverages the power of transformer models, specifically T5, to process and assess answers based on predefined correct responses.
+AceTrack is an AI-powered tool designed and developed by Abdellahi El Moustapha to evaluate student responses to historical questions and provide detailed, constructive feedback. It leverages the power of transformer models, specifically T5, to process and assess answers based on predefined correct responses.
 
 ---
 
@@ -45,30 +45,38 @@ AceTrack is an AI-powered tool designed and developped by Abdellahi El Moustapha
 
 ## Usage
 
-1. **Reassemble the Model Weights**:
-    Due to GitHub's file size limitations, the model weights have been split into smaller chunks. To reassemble them:
+### 1. **Reassemble the Model Weights**
+Due to GitHub's file size limitations, the model weights have been:
+1. Compressed into a `.gz` file: `AceTrack_T5_weights.pt.gz`.
+2. Split into smaller chunks:
+   - `AceTrack_T5_weights.part-aa`
+   - `AceTrack_T5_weights.part-ab`
+   - `AceTrack_T5_weights.part-ac`
 
-    - Ensure the following files are present in the project directory:
-      - `AceTrack_T5_weights.part-aa`
-      - `AceTrack_T5_weights.part-ab`
-      - `AceTrack_T5_weights.part-ac`
+To reassemble the weights:
 
-    - Use the following command to reassemble:
-      ```bash
-      cat AceTrack_T5_weights.part-* > AceTrack_T5_weights.pt
-      ```
+#### **Step 1: Combine the Split Files**
+- On Linux/macOS, run:
+    ```bash
+    cat AceTrack_T5_weights.part-* > AceTrack_T5_weights.pt.gz
+    ```
+- On Windows, run:
+    ```cmd
+    copy /b AceTrack_T5_weights.part-aa + AceTrack_T5_weights.part-ab + AceTrack_T5_weights.part-ac AceTrack_T5_weights.pt.gz
+    ```
 
-      On Windows, use:
-      ```cmd
-      copy /b AceTrack_T5_weights.part-aa + AceTrack_T5_weights.part-ab + AceTrack_T5_weights.part-ac AceTrack_T5_weights.pt
-      ```
+#### **Step 2: Decompress the `.gz` File**
+- On Linux/macOS, run:
+    ```bash
+    gunzip AceTrack_T5_weights.pt.gz
+    ```
+- On Windows, use tools like 7-Zip to decompress the file.
 
-    - Confirm the reassembled file:
-      ```bash
-      ls -lh AceTrack_T5_weights.pt
-      ```
+#### **Step 3: Verify the Reassembled File**
+Run the following command to ensure the `AceTrack_T5_weights.pt` file is correctly reassembled:
+```bash
+ls -lh AceTrack_T5_weights.pt
 
-    Ensure that `AceTrack_T5_weights.pt` is now present in the project folder.
 
 2. **Start the Backend**:
     ```bash
