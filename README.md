@@ -64,7 +64,58 @@ AceTrack is an AI-powered tool designed to evaluate student responses to histori
 
 ---
 
-## File Structure
+## Reassembling Model Weights
+
+Due to GitHub's file size limitations, the model weights have been split into smaller chunks. To reassemble and use them, follow the steps below:
+
+1. **Ensure All Chunks are Present**:
+    The following files must exist in the project directory:
+    - `AceTrack_T5_weights.part-aa`
+    - `AceTrack_T5_weights.part-ab`
+    - `AceTrack_T5_weights.part-ac`
+
+2. **Rejoin the Chunks**:
+    Use the `cat` command (or equivalent for your OS):
+    ```bash
+    cat AceTrack_T5_weights.part-* > AceTrack_T5_weights.pt
+    ```
+
+    On Windows, you can use:
+    ```cmd
+    copy /b AceTrack_T5_weights.part-aa + AceTrack_T5_weights.part-ab + AceTrack_T5_weights.part-ac AceTrack_T5_weights.pt
+    ```
+
+3. **Verify Rejoined File**:
+    Confirm the file has been reassembled:
+    ```bash
+    ls -lh AceTrack_T5_weights.pt
+    ```
+
+4. **Load the Model**:
+    Use the following Python code to load the model and tokenizer:
+    ```python
+    from transformers import T5Tokenizer, T5ForConditionalGeneration
+    import torch
+
+    # Paths
+    weights_path = "AceTrack_T5_weights.pt"
+    tokenizer_path = "AceTrack_T5_tokenizer"
+
+    # Load tokenizer
+    tokenizer = T5Tokenizer.from_pretrained(tokenizer_path)
+
+    # Load model
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    model = T5ForConditionalGeneration.from_pretrained("t5-small")
+    model.load_state_dict(torch.load(weights_path, map_location=device))
+    model.to(device)
+
+    print("Model and tokenizer loaded successfully.")
+    ```
+
+---
+
+## Project Structure
 
 ```plaintext
 AceTrack/
