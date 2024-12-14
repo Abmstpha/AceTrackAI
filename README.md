@@ -1,6 +1,6 @@
 # AceTrackAI - A Student Feedback Generator
 
-AceTrack is an AI-powered tool designed and developed by Abdellahi El Moustapha to evaluate student responses to historical questions and provide detailed, constructive feedback. It leverages the power of transformer models, specifically T5, to process and assess answers based on predefined correct responses.
+AceTrackAI is an AI-powered tool designed and developed by Abdellahi El Moustapha to evaluate student responses to historical questions and provide detailed, constructive feedback. It leverages the power of transformer models, specifically T5, to process and assess answers based on predefined correct responses.
 
 ---
 
