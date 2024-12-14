@@ -1,6 +1,6 @@
 # AceTrackAI - A Student Feedback Generator
 
-AceTrack is an AI-powered tool designed to evaluate student responses to historical questions and provide detailed, constructive feedback. It leverages the power of transformer models, specifically T5, to process and assess answers based on predefined correct responses.
+AceTrack is an AI-powered tool designed and developped by Abdellahi El Moustapha to evaluate student responses to historical questions and provide detailed, constructive feedback. It leverages the power of transformer models, specifically T5, to process and assess answers based on predefined correct responses.
 
 ---
 
@@ -17,8 +17,8 @@ AceTrack is an AI-powered tool designed to evaluate student responses to histori
 
 1. **Clone the Repository**:
     ```bash
-    git clone https://github.com/YourUsername/AceTrack.git
-    cd AceTrack
+    git clone https://github.com/Abmstpha/AceTrackAI.git
+    cd AceTrackAI
     ```
 
 2. **Set Up a Virtual Environment**:
@@ -45,73 +45,47 @@ AceTrack is an AI-powered tool designed to evaluate student responses to histori
 
 ## Usage
 
-1. **Start the Backend**:
+1. **Reassemble the Model Weights**:
+    Due to GitHub's file size limitations, the model weights have been split into smaller chunks. To reassemble them:
+
+    - Ensure the following files are present in the project directory:
+      - `AceTrack_T5_weights.part-aa`
+      - `AceTrack_T5_weights.part-ab`
+      - `AceTrack_T5_weights.part-ac`
+
+    - Use the following command to reassemble:
+      ```bash
+      cat AceTrack_T5_weights.part-* > AceTrack_T5_weights.pt
+      ```
+
+      On Windows, use:
+      ```cmd
+      copy /b AceTrack_T5_weights.part-aa + AceTrack_T5_weights.part-ab + AceTrack_T5_weights.part-ac AceTrack_T5_weights.pt
+      ```
+
+    - Confirm the reassembled file:
+      ```bash
+      ls -lh AceTrack_T5_weights.pt
+      ```
+
+    Ensure that `AceTrack_T5_weights.pt` is now present in the project folder.
+
+2. **Start the Backend**:
     ```bash
     python app.py
     ```
 
-2. **Start the Frontend**:
+3. **Start the Frontend**:
     ```bash
     streamlit run frontend.py
     ```
 
-3. **Access the Application**:
+4. **Access the Application**:
     Open your browser and navigate to `http://localhost:8501`.
 
-4. **Upload a PDF File**:
+5. **Upload a PDF File**:
     - Drag and drop a PDF of the exam.
     - View the feedback generated for each question.
-
----
-
-## Reassembling Model Weights
-
-Due to GitHub's file size limitations, the model weights have been split into smaller chunks. To reassemble and use them, follow the steps below:
-
-1. **Ensure All Chunks are Present**:
-    The following files must exist in the project directory:
-    - `AceTrack_T5_weights.part-aa`
-    - `AceTrack_T5_weights.part-ab`
-    - `AceTrack_T5_weights.part-ac`
-
-2. **Rejoin the Chunks**:
-    Use the `cat` command (or equivalent for your OS):
-    ```bash
-    cat AceTrack_T5_weights.part-* > AceTrack_T5_weights.pt
-    ```
-
-    On Windows, you can use:
-    ```cmd
-    copy /b AceTrack_T5_weights.part-aa + AceTrack_T5_weights.part-ab + AceTrack_T5_weights.part-ac AceTrack_T5_weights.pt
-    ```
-
-3. **Verify Rejoined File**:
-    Confirm the file has been reassembled:
-    ```bash
-    ls -lh AceTrack_T5_weights.pt
-    ```
-
-4. **Load the Model**:
-    Use the following Python code to load the model and tokenizer:
-    ```python
-    from transformers import T5Tokenizer, T5ForConditionalGeneration
-    import torch
-
-    # Paths
-    weights_path = "AceTrack_T5_weights.pt"
-    tokenizer_path = "AceTrack_T5_tokenizer"
-
-    # Load tokenizer
-    tokenizer = T5Tokenizer.from_pretrained(tokenizer_path)
-
-    # Load model
-    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    model = T5ForConditionalGeneration.from_pretrained("t5-small")
-    model.load_state_dict(torch.load(weights_path, map_location=device))
-    model.to(device)
-
-    print("Model and tokenizer loaded successfully.")
-    ```
 
 ---
 
